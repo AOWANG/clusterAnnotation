@@ -7,6 +7,10 @@
 //
 
 #import "AppDelegate.h"
+#import "APIKey.h"
+#import <MAMapKit/MAMapKit.h>
+#import "AnnotationClusterViewController.h"
+
 
 @interface AppDelegate ()
 
@@ -14,9 +18,33 @@
 
 @implementation AppDelegate
 
+- (void)configureAPIKey
+{
+    if ([APIKey length] == 0)
+    {
+        NSString *name   = [NSString stringWithFormat:@"\nSDKVersion:%@\nFILE:%s\nLINE:%d\nMETHOD:%s", [MAMapServices sharedServices].SDKVersion, __FILE__, __LINE__, __func__];
+        NSString *reason = [NSString stringWithFormat:@"请首先配置APIKey.h中的APIKey, 申请APIKey参考见 http://api.amap.com"];
+        
+        @throw [NSException exceptionWithName:name
+                                       reason:reason
+                                     userInfo:nil];
+    }
+    
+    [MAMapServices sharedServices].apiKey = (NSString *)APIKey;
+}
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
     // Override point for customization after application launch.
+    [self configureAPIKey];
+    
+    AnnotationClusterViewController *mainViewController = [[AnnotationClusterViewController alloc] init];
+    
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
+    
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
