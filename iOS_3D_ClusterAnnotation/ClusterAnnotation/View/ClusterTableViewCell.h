@@ -10,8 +10,10 @@
 
 @interface ClusterTableViewCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel *mainLabel;
-@property (weak, nonatomic) IBOutlet UILabel *subTitle;
-@property (weak, nonatomic) IBOutlet UIButton *moreBtn;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *addressLabel;
+@property (weak, nonatomic) IBOutlet UIButton *detailBtn;
+
+@property (weak, nonatomic) IBOutlet UIButton *tapBtn;
 
 @end

@@ -126,7 +126,6 @@ BoundingBox quadTreeNodeDataArrayForPOIs(QuadTreeNodeData *dataArray, NSArray * 
                                           count++;
                                           
                                           [pois addObject:(__bridge AMapPOI *)data.data];
-                                          
                                       });
             
             /* 若区域内仅有一个数据. */
@@ -135,9 +134,7 @@ BoundingBox quadTreeNodeDataArrayForPOIs(QuadTreeNodeData *dataArray, NSArray * 
                 CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(totalX, totalY);
                 ClusterAnnotation *annotation = [[ClusterAnnotation alloc] initWithCoordinate:coordinate count:count];
                 annotation.pois = pois;
-                AMapPOI *poi = [pois lastObject];
-                annotation.title = poi.name;
-                annotation.subtitle = poi.address;
+                
                 [clusteredAnnotations addObject:annotation];
             }
             
@@ -147,7 +144,7 @@ BoundingBox quadTreeNodeDataArrayForPOIs(QuadTreeNodeData *dataArray, NSArray * 
                 CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(totalX / count, totalY / count);
                 ClusterAnnotation *annotation = [[ClusterAnnotation alloc] initWithCoordinate:coordinate count:count];
                 annotation.pois  = pois;
-                annotation.title = [NSString stringWithFormat:@"%lu results here.", (unsigned long)[pois count]];
+
                 [clusteredAnnotations addObject:annotation];
             }
         }

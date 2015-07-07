@@ -19,13 +19,16 @@
 @interface AnnotationClusterViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, strong) CoordinateQuadTree* coordinateQuadTree;
+
 @property (nonatomic, strong) MAMapSMCalloutView *customCalloutView;
-@property (nonatomic, strong) NSMutableArray *tableViewCellContents;
-@property (nonatomic, strong) UITableView *poiListView;
+
+@property (nonatomic, strong) NSMutableArray *selectedPoiArray;
 
 @end
 
 @implementation AnnotationClusterViewController
+
+#warning 有一个bug，弹出annotationview后，点地图其他地方,缩小倍数或放大倍数，弹出框没有消失（或者被大头针覆盖） 2 没有调整屏幕使之适应
 
 #pragma mark - update Annotation
 
@@ -99,19 +102,14 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 60;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSLog(@"select");
+    return 44;
 }
 
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.tableViewCellContents count];
+    return [self.selectedPoiArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -124,27 +122,25 @@
                                            reuseIdentifier:identifier];
     }
     
-    AMapPOI *poi = [self.tableViewCellContents objectAtIndex:indexPath.row];
-    cell.mainLabel.text = poi.name;
-    cell.subTitle.text = poi.address;
+    AMapPOI *poi = [self.selectedPoiArray objectAtIndex:indexPath.row];
+    cell.nameLabel.text = poi.name;
+    cell.addressLabel.text = poi.address;
     
-    [cell.moreBtn setTitle:@"d" forState:UIControlStateNormal];
-    [cell.moreBtn addTarget:self action:@selector(tapp:) forControlEvents:UIControlEventTouchUpInside];
-    cell.moreBtn.tag = indexPath.row;
+    [cell.tapBtn addTarget:self action:@selector(detailBtnTap:) forControlEvents:UIControlEventTouchUpInside];
+    cell.tapBtn.tag = indexPath.row;
     
     return cell;
 }
 
-- (void)tapp:(UIButton *)button
-{
-    NSLog(@"tapp, tapRow =%ld ",button.tag);
+#pragma mark - TapGesture
 
+- (void)detailBtnTap:(UIButton *)button
+{
     PoiDetailViewController *detail = [[PoiDetailViewController alloc] init];
-    detail.poi = self.tableViewCellContents[button.tag];
+    detail.poi = self.selectedPoiArray[button.tag];
 
     /* 进入POI详情页面. */
     [self.navigationController pushViewController:detail animated:YES];
-    
 }
 
 #pragma mark - MAMapViewDelegate
@@ -160,42 +156,39 @@
     [self.mapView deselectAnnotation:view.annotation animated:NO];
     
     
-    [self.tableViewCellContents removeAllObjects];
+    [self.selectedPoiArray removeAllObjects];
     
     ClusterAnnotation *annotation = (ClusterAnnotation *)view.annotation;
     
     for (AMapPOI *poi in annotation.pois) {
-        [self.tableViewCellContents addObject:poi];
+        [self.selectedPoiArray addObject:poi];
     }
 
     self.customCalloutView = [[MAMapSMCalloutView alloc] init];
 
-    {
-        CGFloat height = 44 * self.tableViewCellContents.count + 40 > 200 ? 200 : 44 * self.tableViewCellContents.count + 40;
-        self.customCalloutView.calloutHeight = height;
-        
-        UITableView *poiListView    = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 260, height-20)
-                                                                   style:UITableViewStylePlain];
-        
-        [poiListView registerNib:[UINib nibWithNibName:@"ClusterTableViewCell" bundle:nil] forCellReuseIdentifier:@"ClusterCell"];
-        poiListView.separatorColor  = [UIColor colorWithRed:105.0/255.0 green:105.0/255.0 blue:105.0/255.0 alpha:1.0];
-        poiListView.delegate        = self;
-        poiListView.dataSource      = self;
-        poiListView.backgroundColor = [UIColor clearColor];
-        _customCalloutView.rightAccessoryView = poiListView;
-        _customCalloutView.subviewClass       = [UITableView class];
-        
-        _customCalloutView.backgroundImage    = [UIImage imageNamed:@"map_bubble"];
-        
-        [_customCalloutView presentCalloutFromRect:CGRectMake(view.bounds.origin.x,
-                                                              view.bounds.origin.y,
-                                                              view.bounds.size.width,
-                                                              100)
-                                            inView:view
-                                 constrainedToView:self.view
-                          permittedArrowDirections:MAMapSMCalloutArrowDirectionDown
-                                          animated:YES];
-    }
+    /* 设置弹出AnnotationView */
+    CGFloat height = 44 * self.selectedPoiArray.count + 20 > 200 ? 200 : 44 * self.selectedPoiArray.count + 20;
+    self.customCalloutView.calloutHeight = height;
+    
+    UITableView *poiListView    = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 260, height-20)
+                                                               style:UITableViewStylePlain];
+    
+    [poiListView registerNib:[UINib nibWithNibName:@"ClusterTableViewCell" bundle:nil] forCellReuseIdentifier:@"ClusterCell"];
+    poiListView.separatorColor  = [UIColor colorWithRed:105.0/255.0 green:105.0/255.0 blue:105.0/255.0 alpha:1.0];
+    poiListView.delegate        = self;
+    poiListView.dataSource      = self;
+    poiListView.backgroundColor = [UIColor clearColor];
+    _customCalloutView.rightAccessoryView = poiListView;
+    _customCalloutView.subviewClass       = [UITableView class];
+    
+    _customCalloutView.backgroundImage    = [UIImage imageNamed:@"map_bubble"];
+    
+    [_customCalloutView presentCalloutFromRect:CGRectMake(view.bounds.origin.x, view.bounds.origin.y,
+                                                          view.bounds.size.width, 100)
+                                        inView:view
+                             constrainedToView:self.view
+                      permittedArrowDirections:MAMapSMCalloutArrowDirectionDown
+                                      animated:YES];
 }
 
 - (void)mapView:(MAMapView *)mapView regionDidChangeAnimated:(BOOL)animated
@@ -205,22 +198,6 @@
         [self addAnnotationsToMapView:self.mapView];
     });
 
-}
-
-- (void)mapView:(MAMapView *)mapView annotationView:(MAAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
-{
-    id<MAAnnotation> annotation = view.annotation;
-    
-    if ([annotation isKindOfClass:[ClusterAnnotation class]])
-    {
-        ClusterAnnotation *clusterAnnotation = (ClusterAnnotation*)annotation;
-        
-        PoiDetailViewController *detail = [[PoiDetailViewController alloc] init];
-        detail.poi = [clusterAnnotation.pois lastObject];
-        
-        /* 进入POI详情页面. */
-        [self.navigationController pushViewController:detail animated:YES];
-    }
 }
 
 - (MAAnnotationView *)mapView:(MAMapView *)mapView viewForAnnotation:(id<MAAnnotation>)annotation
@@ -241,8 +218,6 @@
         /* 设置annotationView的属性. */
         annotationView.annotation = annotation;
         annotationView.count = [(ClusterAnnotation *)annotation count];
-        
-        /* 设置annotationView的callout属性和calloutView. */
         annotationView.canShowCallout = YES;
         
         return annotationView;
@@ -315,7 +290,7 @@
     {
         self.coordinateQuadTree = [[CoordinateQuadTree alloc] init];
         
-        self.tableViewCellContents = [[NSMutableArray alloc] init];
+        self.selectedPoiArray = [[NSMutableArray alloc] init];
         
         [self setTitle:@"Cluster Annotations"];
     }
