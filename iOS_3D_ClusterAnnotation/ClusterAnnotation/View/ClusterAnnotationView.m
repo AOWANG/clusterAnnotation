@@ -9,9 +9,6 @@
 #import "ClusterAnnotationView.h"
 #import "ClusterAnnotation.h"
 
-#define kCalloutWidthOnPOICount(count)  count==1? 250.0 :250.0
-#define kCalloutHeightOnPOICount(count) count==1? 55.0  :130.0
-
 
 static CGFloat const ScaleFactorAlpha = 0.3;
 static CGFloat const ScaleFactorBeta = 0.4;
@@ -78,6 +75,24 @@ CGFloat ScaledValueForValue(CGFloat value)
     _countLabel.font = [UIFont boldSystemFontOfSize:12];
     _countLabel.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
     [self addSubview:_countLabel];
+}
+
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event
+{
+    NSArray *subViews = self.subviews;
+    if ([subViews count] > 1)
+    {
+        UIView *subview = [subViews objectAtIndex:1];
+        if ([subview pointInside:[self convertPoint:point toView:subview] withEvent:event])
+        {
+            return YES;
+        }
+    }
+    if (point.x > 0 && point.x < self.frame.size.width && point.y > 0 && point.y < self.frame.size.height)
+    {
+        return YES;
+    }
+    return NO;
 }
 
 - (void)setCount:(NSUInteger)count

@@ -11,12 +11,16 @@
 #import "CoordinateQuadTree.h"
 #import "ClusterAnnotation.h"
 #import "ClusterAnnotationView.h"
+#import "MAMapSMCalloutView.h"
 
 #define kCalloutViewMargin -8
 
-@interface AnnotationClusterViewController ()<UITableViewDelegate>
+@interface AnnotationClusterViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, strong) CoordinateQuadTree* coordinateQuadTree;
+@property (nonatomic, strong) MAMapSMCalloutView *customCalloutView;
+@property (nonatomic, strong) NSMutableArray *tableViewCellContents;
+@property (nonatomic, strong) UITableView *poiListView;
 
 @end
 
@@ -90,7 +94,98 @@
     [view.layer addAnimation:bounceAnimation forKey:@"bounce"];
 }
 
+#pragma mark - UITableViewDelegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 60;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"select");
+}
+
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [self.tableViewCellContents count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    static NSString *identifier = @"POIListCellIdentifier";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    if (!cell)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
+                                      reuseIdentifier:identifier];
+        cell.accessoryType = UITableViewCellAccessoryDetailButton;
+//        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+    AMapPOI *poi = [self.tableViewCellContents objectAtIndex:indexPath.row];
+    
+    cell.textLabel.text = poi.name;
+    cell.detailTextLabel.text = poi.address;
+
+    UIButton *btn = [[UIButton alloc] initWithFrame:cell.bounds];
+    [btn setTitle:@"title" forState:UIControlStateNormal];
+    
+    [cell.accessoryView addSubview:btn];
+
+    return cell;
+}
+
 #pragma mark - MAMapViewDelegate
+
+- (void)mapView:(MAMapView *)mapView didTouchPois:(NSArray *)pois
+{
+    [self.customCalloutView dismissCalloutAnimated:YES];
+}
+
+- (void)mapView:(MAMapView *)mapView didSelectAnnotationView:(MAAnnotationView *)view
+{
+    [self.customCalloutView dismissCalloutAnimated:YES];
+    [self.mapView deselectAnnotation:view.annotation animated:NO];
+    
+    
+    [self.tableViewCellContents removeAllObjects];
+    
+    ClusterAnnotation *annotation = (ClusterAnnotation *)view.annotation;
+    
+    for (AMapPOI *poi in annotation.pois) {
+        [self.tableViewCellContents addObject:poi];
+    }
+
+    self.customCalloutView = [[MAMapSMCalloutView alloc] init];
+
+    {
+        CGFloat height = 44 * self.tableViewCellContents.count + 40 > 200 ? 200 : 44 * self.tableViewCellContents.count + 40;
+        self.customCalloutView.calloutHeight = height;
+        
+        UITableView *poiListView    = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 260, height-20)
+                                                                   style:UITableViewStylePlain];
+        poiListView.separatorColor  = [UIColor colorWithRed:105.0/255.0 green:105.0/255.0 blue:105.0/255.0 alpha:1.0];
+        poiListView.delegate        = self;
+        poiListView.dataSource      = self;
+        poiListView.backgroundColor = [UIColor clearColor];
+        _customCalloutView.rightAccessoryView = poiListView;
+        _customCalloutView.subviewClass       = [UITableView class];
+        
+        _customCalloutView.backgroundImage    = [UIImage imageNamed:@"map_bubble"];
+        
+        [_customCalloutView presentCalloutFromRect:CGRectMake(view.bounds.origin.x,
+                                                              view.bounds.origin.y,
+                                                              view.bounds.size.width,
+                                                              100)
+                                            inView:view
+                                 constrainedToView:self.view
+                          permittedArrowDirections:MAMapSMCalloutArrowDirectionDown
+                                          animated:YES];
+    }
+}
 
 - (void)mapView:(MAMapView *)mapView regionDidChangeAnimated:(BOOL)animated
 {
@@ -138,10 +233,6 @@
         
         /* 设置annotationView的callout属性和calloutView. */
         annotationView.canShowCallout = YES;
-        if (annotationView.count == 1)
-        {
-            annotationView.rightCalloutAccessoryView    = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-        }
         
         return annotationView;
     }
@@ -212,6 +303,8 @@
     if (self = [super init])
     {
         self.coordinateQuadTree = [[CoordinateQuadTree alloc] init];
+        
+        self.tableViewCellContents = [[NSMutableArray alloc] init];
         
         [self setTitle:@"Cluster Annotations"];
     }

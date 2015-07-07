@@ -36,6 +36,7 @@
 		74F464731B4A2E1B001B55AA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74F464071B4A1CE8001B55AA /* UIKit.framework */; };
 		74F464741B4A2E23001B55AA /* AMapSearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74F464011B4A1C6C001B55AA /* AMapSearchKit.framework */; };
 		74F464771B4A2E80001B55AA /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74F464761B4A2E80001B55AA /* MAMapKit.framework */; };
+		74F464821B4BA3AB001B55AA /* MAMapSMCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F464811B4BA3AB001B55AA /* MAMapSMCalloutView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +92,8 @@
 		74F464641B4A2B82001B55AA /* PoiDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoiDetailViewController.h; sourceTree = "<group>"; };
 		74F464651B4A2B82001B55AA /* PoiDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoiDetailViewController.m; sourceTree = "<group>"; };
 		74F464761B4A2E80001B55AA /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MAMapKit.framework; path = ../../../../Downloads/MAMapKit.framework; sourceTree = "<group>"; };
+		74F464801B4BA3AB001B55AA /* MAMapSMCalloutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAMapSMCalloutView.h; sourceTree = "<group>"; };
+		74F464811B4BA3AB001B55AA /* MAMapSMCalloutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAMapSMCalloutView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -244,6 +247,8 @@
 			children = (
 				74F464581B4A2B57001B55AA /* ClusterAnnotationView.h */,
 				74F464591B4A2B57001B55AA /* ClusterAnnotationView.m */,
+				74F464801B4BA3AB001B55AA /* MAMapSMCalloutView.h */,
+				74F464811B4BA3AB001B55AA /* MAMapSMCalloutView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -373,6 +378,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74F464821B4BA3AB001B55AA /* MAMapSMCalloutView.m in Sources */,
 				74F464661B4A2B82001B55AA /* AnnotationClusterViewController.m in Sources */,
 				74F4645D1B4A2B57001B55AA /* ClusterAnnotationView.m in Sources */,
 				74F4645C1B4A2B57001B55AA /* QuadTree.m in Sources */,
