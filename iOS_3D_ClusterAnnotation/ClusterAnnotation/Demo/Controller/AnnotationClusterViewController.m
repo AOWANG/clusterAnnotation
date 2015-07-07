@@ -12,6 +12,7 @@
 #import "ClusterAnnotation.h"
 #import "ClusterAnnotationView.h"
 #import "MAMapSMCalloutView.h"
+#include "ClusterTableViewCell.h"
 
 #define kCalloutViewMargin -8
 
@@ -115,27 +116,35 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    static NSString *identifier = @"ClusterCell";
+    ClusterTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
-    static NSString *identifier = @"POIListCellIdentifier";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    if (!cell)
-    {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
-                                      reuseIdentifier:identifier];
-        cell.accessoryType = UITableViewCellAccessoryDetailButton;
-//        cell.accessoryType = UITableViewCellAccessoryNone;
+    if (cell  == nil) {
+        cell = [[ClusterTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                           reuseIdentifier:identifier];
     }
+    
     AMapPOI *poi = [self.tableViewCellContents objectAtIndex:indexPath.row];
+    cell.mainLabel.text = poi.name;
+    cell.subTitle.text = poi.address;
     
-    cell.textLabel.text = poi.name;
-    cell.detailTextLabel.text = poi.address;
-
-    UIButton *btn = [[UIButton alloc] initWithFrame:cell.bounds];
-    [btn setTitle:@"title" forState:UIControlStateNormal];
+    [cell.moreBtn setTitle:@"d" forState:UIControlStateNormal];
+    [cell.moreBtn addTarget:self action:@selector(tapp:) forControlEvents:UIControlEventTouchUpInside];
+    cell.moreBtn.tag = indexPath.row;
     
-    [cell.accessoryView addSubview:btn];
-
     return cell;
+}
+
+- (void)tapp:(UIButton *)button
+{
+    NSLog(@"tapp, tapRow =%ld ",button.tag);
+
+    PoiDetailViewController *detail = [[PoiDetailViewController alloc] init];
+    detail.poi = self.tableViewCellContents[button.tag];
+
+    /* 进入POI详情页面. */
+    [self.navigationController pushViewController:detail animated:YES];
+    
 }
 
 #pragma mark - MAMapViewDelegate
@@ -167,6 +176,8 @@
         
         UITableView *poiListView    = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 260, height-20)
                                                                    style:UITableViewStylePlain];
+        
+        [poiListView registerNib:[UINib nibWithNibName:@"ClusterTableViewCell" bundle:nil] forCellReuseIdentifier:@"ClusterCell"];
         poiListView.separatorColor  = [UIColor colorWithRed:105.0/255.0 green:105.0/255.0 blue:105.0/255.0 alpha:1.0];
         poiListView.delegate        = self;
         poiListView.dataSource      = self;

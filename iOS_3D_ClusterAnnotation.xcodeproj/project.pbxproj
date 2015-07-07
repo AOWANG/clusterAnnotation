@@ -37,6 +37,8 @@
 		74F464741B4A2E23001B55AA /* AMapSearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74F464011B4A1C6C001B55AA /* AMapSearchKit.framework */; };
 		74F464771B4A2E80001B55AA /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74F464761B4A2E80001B55AA /* MAMapKit.framework */; };
 		74F464821B4BA3AB001B55AA /* MAMapSMCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F464811B4BA3AB001B55AA /* MAMapSMCalloutView.m */; };
+		74F464891B4BCCFE001B55AA /* ClusterTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F464871B4BCCFE001B55AA /* ClusterTableViewCell.m */; };
+		74F4648A1B4BCCFE001B55AA /* ClusterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74F464881B4BCCFE001B55AA /* ClusterTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +96,9 @@
 		74F464761B4A2E80001B55AA /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MAMapKit.framework; path = ../../../../Downloads/MAMapKit.framework; sourceTree = "<group>"; };
 		74F464801B4BA3AB001B55AA /* MAMapSMCalloutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAMapSMCalloutView.h; sourceTree = "<group>"; };
 		74F464811B4BA3AB001B55AA /* MAMapSMCalloutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAMapSMCalloutView.m; sourceTree = "<group>"; };
+		74F464861B4BCCFE001B55AA /* ClusterTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClusterTableViewCell.h; sourceTree = "<group>"; };
+		74F464871B4BCCFE001B55AA /* ClusterTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClusterTableViewCell.m; sourceTree = "<group>"; };
+		74F464881B4BCCFE001B55AA /* ClusterTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClusterTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -249,6 +254,9 @@
 				74F464591B4A2B57001B55AA /* ClusterAnnotationView.m */,
 				74F464801B4BA3AB001B55AA /* MAMapSMCalloutView.h */,
 				74F464811B4BA3AB001B55AA /* MAMapSMCalloutView.m */,
+				74F464861B4BCCFE001B55AA /* ClusterTableViewCell.h */,
+				74F464871B4BCCFE001B55AA /* ClusterTableViewCell.m */,
+				74F464881B4BCCFE001B55AA /* ClusterTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -361,6 +369,7 @@
 				747B94481B4688AE00474F78 /* Main.storyboard in Resources */,
 				747B944D1B4688AE00474F78 /* LaunchScreen.xib in Resources */,
 				747B944A1B4688AE00474F78 /* Images.xcassets in Resources */,
+				74F4648A1B4BCCFE001B55AA /* ClusterTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,6 +392,7 @@
 				74F4645D1B4A2B57001B55AA /* ClusterAnnotationView.m in Sources */,
 				74F4645C1B4A2B57001B55AA /* QuadTree.m in Sources */,
 				747B94421B4688AE00474F78 /* AppDelegate.m in Sources */,
+				74F464891B4BCCFE001B55AA /* ClusterTableViewCell.m in Sources */,
 				747B943F1B4688AE00474F78 /* main.m in Sources */,
 				74F464681B4A2B82001B55AA /* PoiDetailViewController.m in Sources */,
 				74F4645A1B4A2B57001B55AA /* ClusterAnnotation.m in Sources */,
