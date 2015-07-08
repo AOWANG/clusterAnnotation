@@ -302,9 +302,8 @@
     [self searchPoiWithKeyword:@"Apple"];
 }
 
-- (void)viewDidUnload
+- (void)dealloc
 {
-    [super viewDidUnload];
     [self.coordinateQuadTree clean];
 }
 
