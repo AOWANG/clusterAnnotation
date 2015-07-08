@@ -28,8 +28,6 @@
 
 @implementation AnnotationClusterViewController
 
-#warning 有一个bug，弹出annotationview后，点地图其他地方,缩小倍数或放大倍数，弹出框没有消失（或者被大头针覆盖） 2 没有调整屏幕使之适应
-
 #pragma mark - update Annotation
 
 /* 更新annotation. */
@@ -117,7 +115,8 @@
     static NSString *identifier = @"ClusterCell";
     ClusterTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
-    if (cell  == nil) {
+    if (cell  == nil)
+    {
         cell = [[ClusterTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                            reuseIdentifier:identifier];
     }
@@ -145,29 +144,26 @@
 
 #pragma mark - MAMapViewDelegate
 
-- (void)mapView:(MAMapView *)mapView didTouchPois:(NSArray *)pois
+- (void)mapView:(MAMapView *)mapView didDeselectAnnotationView:(MAAnnotationView *)view
 {
     [self.customCalloutView dismissCalloutAnimated:YES];
 }
 
 - (void)mapView:(MAMapView *)mapView didSelectAnnotationView:(MAAnnotationView *)view
 {
-    [self.customCalloutView dismissCalloutAnimated:YES];
-    [self.mapView deselectAnnotation:view.annotation animated:NO];
-    
-    
-    [self.selectedPoiArray removeAllObjects];
-    
     ClusterAnnotation *annotation = (ClusterAnnotation *)view.annotation;
-    
-    for (AMapPOI *poi in annotation.pois) {
+    [self.selectedPoiArray removeAllObjects];
+    for (AMapPOI *poi in annotation.pois)
+    {
         [self.selectedPoiArray addObject:poi];
     }
 
+    [self.mapView setCenterCoordinate:view.annotation.coordinate animated:YES];
+    
     self.customCalloutView = [[MAMapSMCalloutView alloc] init];
 
     /* 设置弹出AnnotationView */
-    CGFloat height = 44 * self.selectedPoiArray.count + 20 > 200 ? 200 : 44 * self.selectedPoiArray.count + 20;
+    CGFloat height = 44*self.selectedPoiArray.count + 20 > 200 ? 200 : 44*self.selectedPoiArray.count + 20;
     self.customCalloutView.calloutHeight = height;
     
     UITableView *poiListView    = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 260, height-20)
@@ -218,7 +214,9 @@
         /* 设置annotationView的属性. */
         annotationView.annotation = annotation;
         annotationView.count = [(ClusterAnnotation *)annotation count];
-        annotationView.canShowCallout = YES;
+        
+        /* 不弹出原生annotation */
+        annotationView.canShowCallout = NO;
         
         return annotationView;
     }
