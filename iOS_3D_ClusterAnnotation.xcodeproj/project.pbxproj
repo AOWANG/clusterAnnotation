@@ -34,11 +34,11 @@
 		74F464711B4A2E1B001B55AA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74F4640B1B4A1CFD001B55AA /* CoreGraphics.framework */; };
 		74F464721B4A2E1B001B55AA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74F464091B4A1CF2001B55AA /* Foundation.framework */; };
 		74F464731B4A2E1B001B55AA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74F464071B4A1CE8001B55AA /* UIKit.framework */; };
-		74F464741B4A2E23001B55AA /* AMapSearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74F464011B4A1C6C001B55AA /* AMapSearchKit.framework */; };
-		74F464771B4A2E80001B55AA /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74F464761B4A2E80001B55AA /* MAMapKit.framework */; };
 		74F464821B4BA3AB001B55AA /* MAMapSMCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F464811B4BA3AB001B55AA /* MAMapSMCalloutView.m */; };
 		74F464891B4BCCFE001B55AA /* ClusterTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F464871B4BCCFE001B55AA /* ClusterTableViewCell.m */; };
 		74F4648A1B4BCCFE001B55AA /* ClusterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74F464881B4BCCFE001B55AA /* ClusterTableViewCell.xib */; };
+		74F464BF1B4D1181001B55AA /* AMapSearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74F464BD1B4D1181001B55AA /* AMapSearchKit.framework */; };
+		74F464C01B4D1181001B55AA /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74F464BE1B4D1181001B55AA /* MAMapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,7 +66,6 @@
 		74F463F21B4A1471001B55AA /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
 		74F463F31B4A1471001B55AA /* offline */ = {isa = PBXFileReference; lastKnownFileType = folder; path = offline; sourceTree = "<group>"; };
 		74F463F71B4A14BE001B55AA /* APIKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIKey.h; sourceTree = "<group>"; };
-		74F464011B4A1C6C001B55AA /* AMapSearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMapSearchKit.framework; path = ../../../../Downloads/AMapSearchKit.framework; sourceTree = "<group>"; };
 		74F464051B4A1C9E001B55AA /* AMap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AMap.bundle; sourceTree = "<group>"; };
 		74F464071B4A1CE8001B55AA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		74F464091B4A1CF2001B55AA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -93,12 +92,13 @@
 		74F464631B4A2B82001B55AA /* BaseMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseMapViewController.m; sourceTree = "<group>"; };
 		74F464641B4A2B82001B55AA /* PoiDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoiDetailViewController.h; sourceTree = "<group>"; };
 		74F464651B4A2B82001B55AA /* PoiDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoiDetailViewController.m; sourceTree = "<group>"; };
-		74F464761B4A2E80001B55AA /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MAMapKit.framework; path = ../../../../Downloads/MAMapKit.framework; sourceTree = "<group>"; };
 		74F464801B4BA3AB001B55AA /* MAMapSMCalloutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAMapSMCalloutView.h; sourceTree = "<group>"; };
 		74F464811B4BA3AB001B55AA /* MAMapSMCalloutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAMapSMCalloutView.m; sourceTree = "<group>"; };
 		74F464861B4BCCFE001B55AA /* ClusterTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClusterTableViewCell.h; sourceTree = "<group>"; };
 		74F464871B4BCCFE001B55AA /* ClusterTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClusterTableViewCell.m; sourceTree = "<group>"; };
 		74F464881B4BCCFE001B55AA /* ClusterTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClusterTableViewCell.xib; sourceTree = "<group>"; };
+		74F464BD1B4D1181001B55AA /* AMapSearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AMapSearchKit.framework; sourceTree = "<group>"; };
+		74F464BE1B4D1181001B55AA /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MAMapKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,7 +106,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				74F464771B4A2E80001B55AA /* MAMapKit.framework in Frameworks */,
 				74F464691B4A2E1B001B55AA /* Security.framework in Frameworks */,
 				74F4646A1B4A2E1B001B55AA /* libstdc++.6.0.9.dylib in Frameworks */,
 				74F4646B1B4A2E1B001B55AA /* libz.dylib in Frameworks */,
@@ -115,9 +114,10 @@
 				74F4646E1B4A2E1B001B55AA /* CoreLocation.framework in Frameworks */,
 				74F4646F1B4A2E1B001B55AA /* OpenGLES.framework in Frameworks */,
 				74F464701B4A2E1B001B55AA /* QuartzCore.framework in Frameworks */,
+				74F464BF1B4D1181001B55AA /* AMapSearchKit.framework in Frameworks */,
 				74F464711B4A2E1B001B55AA /* CoreGraphics.framework in Frameworks */,
-				74F464741B4A2E23001B55AA /* AMapSearchKit.framework in Frameworks */,
 				74F464721B4A2E1B001B55AA /* Foundation.framework in Frameworks */,
+				74F464C01B4D1181001B55AA /* MAMapKit.framework in Frameworks */,
 				74F464731B4A2E1B001B55AA /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -170,7 +170,6 @@
 			isa = PBXGroup;
 			children = (
 				74F464041B4A1C9E001B55AA /* Resources */,
-				74F464011B4A1C6C001B55AA /* AMapSearchKit.framework */,
 				74F463F21B4A1471001B55AA /* images */,
 				74F463F31B4A1471001B55AA /* offline */,
 				747B943D1B4688AE00474F78 /* Info.plist */,
@@ -207,7 +206,8 @@
 		74F464041B4A1C9E001B55AA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				74F464761B4A2E80001B55AA /* MAMapKit.framework */,
+				74F464BD1B4D1181001B55AA /* AMapSearchKit.framework */,
+				74F464BE1B4D1181001B55AA /* MAMapKit.framework */,
 				74F4644D1B4A2095001B55AA /* Security.framework */,
 				74F4644B1B4A2088001B55AA /* libstdc++.6.0.9.dylib */,
 				74F464491B4A207C001B55AA /* libz.dylib */,
@@ -527,8 +527,10 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/pcuser/Downloads,
+					"$(PROJECT_DIR)/Resources",
 				);
 				INFOPLIST_FILE = iOS_3D_ClusterAnnotation/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -543,8 +545,10 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/pcuser/Downloads,
+					"$(PROJECT_DIR)/Resources",
 				);
 				INFOPLIST_FILE = iOS_3D_ClusterAnnotation/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
