@@ -7,9 +7,28 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AMapSearchKit/AMapCommonObj.h>
 
-@interface CustomCalloutView : UIView<UITableViewDelegate>
+@protocol CustomCalloutViewTapDelegate <NSObject>
+
+- (void)detailButtonTap:(NSInteger)index;
+
+@end
+
+
+
+@interface CustomCalloutView : UIView<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableview;
+
+@property (nonatomic, strong) UIButton *btn;
+
+@property (nonatomic, strong) NSMutableArray *poiArray;
+
+@property (nonatomic, weak) id<CustomCalloutViewTapDelegate> delegate;
+
+- (void)dismissCalloutView;
+
+- (void)setPoiArray:(NSMutableArray *)poiArray;
 
 @end

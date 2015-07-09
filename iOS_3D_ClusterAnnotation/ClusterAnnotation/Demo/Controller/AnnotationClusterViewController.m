@@ -11,16 +11,16 @@
 #import "CoordinateQuadTree.h"
 #import "ClusterAnnotation.h"
 #import "ClusterAnnotationView.h"
-#import "MAMapSMCalloutView.h"
-#include "ClusterTableViewCell.h"
+#import "ClusterTableViewCell.h"
+#import "CustomCalloutView.h"
 
 #define kCalloutViewMargin -8
 
-@interface AnnotationClusterViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface AnnotationClusterViewController ()<CustomCalloutViewTapDelegate>
 
 @property (nonatomic, strong) CoordinateQuadTree* coordinateQuadTree;
 
-@property (nonatomic, strong) MAMapSMCalloutView *customCalloutView;
+@property (nonatomic, strong) CustomCalloutView *customCalloutView;
 
 @property (nonatomic, strong) NSMutableArray *selectedPoiArray;
 
@@ -76,48 +76,13 @@
     [self updateMapViewAnnotationsWithAnnotations:annotations];
 }
 
-#pragma mark - UITableViewDelegate
+#pragma mark - CustomCalloutViewTapDelegate
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 44;
-}
-
-#pragma mark - UITableViewDataSource
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return [self.selectedPoiArray count];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *identifier = @"ClusterCell";
-    ClusterTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    
-    if (cell  == nil)
-    {
-        cell = [[ClusterTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
-                                           reuseIdentifier:identifier];
-    }
-
-    AMapPOI *poi = [self.selectedPoiArray objectAtIndex:indexPath.row];
-    cell.textLabel.text = poi.name;
-    cell.detailTextLabel.text = poi.address;
-
-    [cell.tapBtn addTarget:self action:@selector(detailBtnTap:) forControlEvents:UIControlEventTouchUpInside];
-    cell.tapBtn.tag = indexPath.row;
-    
-    return cell;
-}
-
-#pragma mark - TapGesture
-
-- (void)detailBtnTap:(UIButton *)button
+- (void)detailButtonTap:(NSInteger)index
 {
     PoiDetailViewController *detail = [[PoiDetailViewController alloc] init];
-    detail.poi = self.selectedPoiArray[button.tag];
-
+    detail.poi = self.selectedPoiArray[index];
+    
     /* 进入POI详情页面. */
     [self.navigationController pushViewController:detail animated:YES];
 }
@@ -126,7 +91,7 @@
 
 - (void)mapView:(MAMapView *)mapView didDeselectAnnotationView:(MAAnnotationView *)view
 {
-    [self.customCalloutView dismissCalloutAnimated:YES];
+    [self.customCalloutView dismissCalloutView];
 }
 
 - (void)mapView:(MAMapView *)mapView didSelectAnnotationView:(MAAnnotationView *)view
@@ -140,30 +105,13 @@
 
     [self.mapView setCenterCoordinate:view.annotation.coordinate animated:YES];
     
-    self.customCalloutView = [[MAMapSMCalloutView alloc] init];
-
-    /* 设置弹出AnnotationView */
-    CGFloat height = 44*self.selectedPoiArray.count + 20 > 200 ? 200 : 44*self.selectedPoiArray.count + 20;
-    self.customCalloutView.calloutHeight = height;
+    CGFloat height = 44*self.selectedPoiArray.count + 12> 200 ? 200 : 44*self.selectedPoiArray.count + 12;
     
-    UITableView *poiListView    = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 260, height-20)
-                                                               style:UITableViewStylePlain];
+    self.customCalloutView = [[CustomCalloutView alloc] initWithFrame:CGRectMake(-130+view.bounds.size.width/2, -height, 260, height)];
+    [self.customCalloutView setPoiArray:self.selectedPoiArray];
+    self.customCalloutView.delegate = self;
     
-    poiListView.separatorColor  = [UIColor colorWithRed:105.0/255.0 green:105.0/255.0 blue:105.0/255.0 alpha:1.0];
-    poiListView.delegate        = self;
-    poiListView.dataSource      = self;
-    poiListView.backgroundColor = [UIColor clearColor];
-    _customCalloutView.rightAccessoryView = poiListView;
-    _customCalloutView.subviewClass       = [UITableView class];
-    
-    _customCalloutView.backgroundImage    = [UIImage imageNamed:@"map_bubble"];
-    
-    [_customCalloutView presentCalloutFromRect:CGRectMake(view.bounds.origin.x, view.bounds.origin.y,
-                                                          view.bounds.size.width, 100)
-                                        inView:view
-                             constrainedToView:self.view
-                      permittedArrowDirections:MAMapSMCalloutArrowDirectionDown
-                                      animated:YES];
+    [view addSubview:self.customCalloutView];
 }
 
 - (void)mapView:(MAMapView *)mapView regionDidChangeAnimated:(BOOL)animated
@@ -172,7 +120,6 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self addAnnotationsToMapView:self.mapView];
     });
-
 }
 
 - (MAAnnotationView *)mapView:(MAMapView *)mapView viewForAnnotation:(id<MAAnnotation>)annotation
