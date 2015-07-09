@@ -10,4 +10,20 @@
 
 @implementation ClusterTableViewCell
 
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    
+    if (self)
+    {
+        self.accessoryType = UITableViewCellAccessoryDetailButton;
+        self.tapBtn = [[UIButton alloc] initWithFrame:self.bounds];
+        self.tapBtn.backgroundColor = [UIColor clearColor];
+        
+        [self addSubview:self.tapBtn];
+    }
+    
+    return self;
+}
+
 @end

@@ -117,14 +117,14 @@
     
     if (cell  == nil)
     {
-        cell = [[ClusterTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+        cell = [[ClusterTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
                                            reuseIdentifier:identifier];
     }
-    
+
     AMapPOI *poi = [self.selectedPoiArray objectAtIndex:indexPath.row];
-    cell.nameLabel.text = poi.name;
-    cell.addressLabel.text = poi.address;
-    
+    cell.textLabel.text = poi.name;
+    cell.detailTextLabel.text = poi.address;
+
     [cell.tapBtn addTarget:self action:@selector(detailBtnTap:) forControlEvents:UIControlEventTouchUpInside];
     cell.tapBtn.tag = indexPath.row;
     
@@ -169,7 +169,7 @@
     UITableView *poiListView    = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 260, height-20)
                                                                style:UITableViewStylePlain];
     
-    [poiListView registerNib:[UINib nibWithNibName:@"ClusterTableViewCell" bundle:nil] forCellReuseIdentifier:@"ClusterCell"];
+//    [poiListView registerNib:[UINib nibWithNibName:@"ClusterTableViewCell" bundle:nil] forCellReuseIdentifier:@"ClusterCell"];
     poiListView.separatorColor  = [UIColor colorWithRed:105.0/255.0 green:105.0/255.0 blue:105.0/255.0 alpha:1.0];
     poiListView.delegate        = self;
     poiListView.dataSource      = self;

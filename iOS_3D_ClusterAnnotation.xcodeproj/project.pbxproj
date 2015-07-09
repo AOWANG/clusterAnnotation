@@ -36,7 +36,6 @@
 		74F464731B4A2E1B001B55AA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74F464071B4A1CE8001B55AA /* UIKit.framework */; };
 		74F464821B4BA3AB001B55AA /* MAMapSMCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F464811B4BA3AB001B55AA /* MAMapSMCalloutView.m */; };
 		74F464891B4BCCFE001B55AA /* ClusterTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F464871B4BCCFE001B55AA /* ClusterTableViewCell.m */; };
-		74F4648A1B4BCCFE001B55AA /* ClusterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74F464881B4BCCFE001B55AA /* ClusterTableViewCell.xib */; };
 		74F464BF1B4D1181001B55AA /* AMapSearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74F464BD1B4D1181001B55AA /* AMapSearchKit.framework */; };
 		74F464C01B4D1181001B55AA /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74F464BE1B4D1181001B55AA /* MAMapKit.framework */; };
 /* End PBXBuildFile section */
@@ -96,7 +95,6 @@
 		74F464811B4BA3AB001B55AA /* MAMapSMCalloutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAMapSMCalloutView.m; sourceTree = "<group>"; };
 		74F464861B4BCCFE001B55AA /* ClusterTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClusterTableViewCell.h; sourceTree = "<group>"; };
 		74F464871B4BCCFE001B55AA /* ClusterTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClusterTableViewCell.m; sourceTree = "<group>"; };
-		74F464881B4BCCFE001B55AA /* ClusterTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClusterTableViewCell.xib; sourceTree = "<group>"; };
 		74F464BD1B4D1181001B55AA /* AMapSearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AMapSearchKit.framework; sourceTree = "<group>"; };
 		74F464BE1B4D1181001B55AA /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MAMapKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -256,7 +254,6 @@
 				74F464811B4BA3AB001B55AA /* MAMapSMCalloutView.m */,
 				74F464861B4BCCFE001B55AA /* ClusterTableViewCell.h */,
 				74F464871B4BCCFE001B55AA /* ClusterTableViewCell.m */,
-				74F464881B4BCCFE001B55AA /* ClusterTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -369,7 +366,6 @@
 				747B94481B4688AE00474F78 /* Main.storyboard in Resources */,
 				747B944D1B4688AE00474F78 /* LaunchScreen.xib in Resources */,
 				747B944A1B4688AE00474F78 /* Images.xcassets in Resources */,
-				74F4648A1B4BCCFE001B55AA /* ClusterTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
