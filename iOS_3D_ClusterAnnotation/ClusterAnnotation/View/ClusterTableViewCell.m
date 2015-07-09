@@ -16,7 +16,7 @@
     
     if (self)
     {
-        self.accessoryType = UITableViewCellAccessoryDetailButton;
+        self.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
         self.tapBtn = [[UIButton alloc] initWithFrame:self.bounds];
         self.tapBtn.backgroundColor = [UIColor clearColor];
         
