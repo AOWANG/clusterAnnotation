@@ -38,6 +38,7 @@
 		74F464891B4BCCFE001B55AA /* ClusterTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F464871B4BCCFE001B55AA /* ClusterTableViewCell.m */; };
 		74F464BF1B4D1181001B55AA /* AMapSearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74F464BD1B4D1181001B55AA /* AMapSearchKit.framework */; };
 		74F464C01B4D1181001B55AA /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74F464BE1B4D1181001B55AA /* MAMapKit.framework */; };
+		74F464C51B4E11D2001B55AA /* CustomCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F464C41B4E11D2001B55AA /* CustomCalloutView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +98,8 @@
 		74F464871B4BCCFE001B55AA /* ClusterTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClusterTableViewCell.m; sourceTree = "<group>"; };
 		74F464BD1B4D1181001B55AA /* AMapSearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AMapSearchKit.framework; sourceTree = "<group>"; };
 		74F464BE1B4D1181001B55AA /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MAMapKit.framework; sourceTree = "<group>"; };
+		74F464C31B4E11D2001B55AA /* CustomCalloutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCalloutView.h; sourceTree = "<group>"; };
+		74F464C41B4E11D2001B55AA /* CustomCalloutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCalloutView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -254,6 +257,8 @@
 				74F464811B4BA3AB001B55AA /* MAMapSMCalloutView.m */,
 				74F464861B4BCCFE001B55AA /* ClusterTableViewCell.h */,
 				74F464871B4BCCFE001B55AA /* ClusterTableViewCell.m */,
+				74F464C31B4E11D2001B55AA /* CustomCalloutView.h */,
+				74F464C41B4E11D2001B55AA /* CustomCalloutView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -383,6 +388,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74F464C51B4E11D2001B55AA /* CustomCalloutView.m in Sources */,
 				74F464821B4BA3AB001B55AA /* MAMapSMCalloutView.m in Sources */,
 				74F464661B4A2B82001B55AA /* AnnotationClusterViewController.m in Sources */,
 				74F4645D1B4A2B57001B55AA /* ClusterAnnotationView.m in Sources */,

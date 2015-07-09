@@ -76,26 +76,6 @@
     [self updateMapViewAnnotationsWithAnnotations:annotations];
 }
 
-/* annotation弹出的动画. */
-- (void)addBounceAnnimationToView:(UIView *)view
-{
-    CAKeyframeAnimation *bounceAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform.scale"];
-    
-    bounceAnimation.values = @[@(0.05), @(1.1), @(0.9), @(1)];
-    bounceAnimation.duration = 0.6;
-    
-    NSMutableArray *timingFunctions = [[NSMutableArray alloc] initWithCapacity:bounceAnimation.values.count];
-    for (NSUInteger i = 0; i < bounceAnimation.values.count; i++)
-    {
-        [timingFunctions addObject:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-    }
-    [bounceAnimation setTimingFunctions:timingFunctions.copy];
-    
-    bounceAnimation.removedOnCompletion = NO;
-    
-    [view.layer addAnimation:bounceAnimation forKey:@"bounce"];
-}
-
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -169,7 +149,6 @@
     UITableView *poiListView    = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 260, height-20)
                                                                style:UITableViewStylePlain];
     
-//    [poiListView registerNib:[UINib nibWithNibName:@"ClusterTableViewCell" bundle:nil] forCellReuseIdentifier:@"ClusterCell"];
     poiListView.separatorColor  = [UIColor colorWithRed:105.0/255.0 green:105.0/255.0 blue:105.0/255.0 alpha:1.0];
     poiListView.delegate        = self;
     poiListView.dataSource      = self;
@@ -229,7 +208,8 @@
     /* 为新添的annotationView添加弹出动画. */
     for (UIView *view in views)
     {
-        [self addBounceAnnimationToView:view];
+        ClusterAnnotationView *annotationView = (ClusterAnnotationView*)view;
+        [annotationView addBounceAnnimation];
     }
 }
 
