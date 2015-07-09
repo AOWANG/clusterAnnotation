@@ -104,10 +104,8 @@
     }
 
     [self.mapView setCenterCoordinate:view.annotation.coordinate animated:YES];
-    
-    CGFloat height = 44*self.selectedPoiArray.count + 12> 200 ? 200 : 44*self.selectedPoiArray.count + 12;
-    
-    self.customCalloutView = [[CustomCalloutView alloc] initWithFrame:CGRectMake(-130+view.bounds.size.width/2, -height, 260, height)];
+
+    self.customCalloutView = [[CustomCalloutView alloc] init];
     [self.customCalloutView setPoiArray:self.selectedPoiArray];
     self.customCalloutView.delegate = self;
     
@@ -148,16 +146,6 @@
     }
     
     return nil;
-}
-
-- (void)mapView:(MAMapView *)mapView didAddAnnotationViews:(NSArray *)views
-{
-    /* 为新添的annotationView添加弹出动画. */
-    for (UIView *view in views)
-    {
-        ClusterAnnotationView *annotationView = (ClusterAnnotationView*)view;
-        [annotationView addBounceAnnimation];
-    }
 }
 
 #pragma mark - SearchPOI

@@ -19,16 +19,12 @@
 
 @interface CustomCalloutView : UIView<UITableViewDelegate,UITableViewDataSource>
 
-@property (nonatomic, strong) UITableView *tableview;
-
-@property (nonatomic, strong) UIButton *btn;
-
-@property (nonatomic, strong) NSMutableArray *poiArray;
+@property (nonatomic, strong) NSArray *poiArray;
 
 @property (nonatomic, weak) id<CustomCalloutViewTapDelegate> delegate;
 
 - (void)dismissCalloutView;
 
-- (void)setPoiArray:(NSMutableArray *)poiArray;
+- (void)setPoiArray:(NSArray *)poiArray;
 
 @end

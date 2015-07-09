@@ -14,6 +14,4 @@
 
 @property (nonatomic, assign) NSUInteger count;
 
-- (void)addBounceAnnimation;
-
 @end

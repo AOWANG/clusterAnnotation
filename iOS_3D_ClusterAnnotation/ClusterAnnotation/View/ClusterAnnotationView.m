@@ -110,7 +110,14 @@ CGFloat ScaledValueForValue(CGFloat value)
     [self setNeedsDisplay];
 }
 
-#pragma mark annimation
+#pragma mark - annimation
+
+- (void)willMoveToSuperview:(UIView *)newSuperview
+{
+    [super willMoveToSuperview:newSuperview];
+    
+    [self addBounceAnnimation];
+}
 
 - (void)addBounceAnnimation
 {

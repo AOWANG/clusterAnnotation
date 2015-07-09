@@ -10,16 +10,41 @@
 #import "ClusterTableViewCell.h"
 
 
-#define kArrorHeight    10
+const NSInteger kArrorHeight = 10;
+
+const CGFloat kAnnotationCircleRaduis = 13.5;
+
+const NSInteger kWidth = 260;
+const NSInteger kMaxHeight = 200;
+
+const NSInteger kTableViewHoriMargin = 5;
+const NSInteger kTableViewBottomMargin = 12;
+
+const NSInteger kCellHeight = 44;
+
+
+@interface CustomCalloutView()
+
+@property (nonatomic, strong) UITableView *tableview;
+
+@end
 
 @implementation CustomCalloutView
 
-- (void)setPoiArray:(NSMutableArray *)poiArray
+- (void)setPoiArray:(NSArray *)poiArray
 {
-    if (_poiArray == nil) {
-        _poiArray = [[NSMutableArray alloc] init];
+    if (_poiArray == poiArray)
+    {
+        return;
     }
-    [self.poiArray setArray:poiArray];
+    
+    _poiArray = poiArray;
+    
+    CGFloat height = kCellHeight*self.poiArray.count + kTableViewBottomMargin > kMaxHeight ? kMaxHeight : kCellHeight*self.poiArray.count + kTableViewBottomMargin;
+
+    self.frame = CGRectMake(-kWidth/2+kAnnotationCircleRaduis, -height, kWidth, height);
+    
+    self.tableview.frame = CGRectMake(kTableViewHoriMargin, 0, self.bounds.size.width-kTableViewHoriMargin*2, self.bounds.size.height-kArrorHeight);
 }
 
 - (void)dismissCalloutView
@@ -52,9 +77,9 @@
                                            reuseIdentifier:identifier];
     }
 
-    AMapPOI *pow = [self.poiArray objectAtIndex:indexPath.row];
-    cell.textLabel.text = pow.name;
-    cell.detailTextLabel.text = pow.address;
+    AMapPOI *poi = [self.poiArray objectAtIndex:indexPath.row];
+    cell.textLabel.text = poi.name;
+    cell.detailTextLabel.text = poi.address;
     
     [cell.tapBtn addTarget:self action:@selector(detailBtnTap:) forControlEvents:UIControlEventTouchUpInside];
     cell.tapBtn.tag = indexPath.row;
@@ -121,8 +146,8 @@
     if (self)
     {
         self.backgroundColor = [UIColor clearColor];
-        
-        self.tableview = [[UITableView alloc] initWithFrame:CGRectMake(5, 0, self.bounds.size.width-10, self.bounds.size.height-kArrorHeight) style:UITableViewStylePlain];
+
+        self.tableview = [[UITableView alloc] init];
         self.tableview.delegate = self;
         self.tableview.dataSource = self;
         
@@ -130,5 +155,7 @@
     }
     return self;
 }
+
+
 
 @end
