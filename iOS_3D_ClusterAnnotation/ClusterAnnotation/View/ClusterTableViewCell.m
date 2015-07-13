@@ -20,10 +20,26 @@
         self.tapBtn = [[UIButton alloc] initWithFrame:self.bounds];
         self.tapBtn.backgroundColor = [UIColor clearColor];
         
+        UIImage *tappedImage = [self createImageWithColor:[UIColor colorWithWhite:0.667 alpha:0.3] andSize:self.tapBtn.frame.size];
+        [self.tapBtn setBackgroundImage:tappedImage forState:UIControlStateHighlighted];
+    
         [self addSubview:self.tapBtn];
     }
     
     return self;
+}
+
+- (UIImage *)createImageWithColor:(UIColor *)color andSize:(CGSize)size
+{
+    CGRect rect=CGRectMake(0.0f, 0.0f, size.width, size.height);
+    UIGraphicsBeginImageContext(size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    
+    UIImage *theImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return theImage;
 }
 
 @end

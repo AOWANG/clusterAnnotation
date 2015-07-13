@@ -91,9 +91,9 @@ const NSInteger kCellHeight = 44;
 
 - (void)detailBtnTap:(UIButton *)button
 {
-    if ([self.delegate respondsToSelector:@selector(detailButtonTap:)])
+    if ([self.delegate respondsToSelector:@selector(didDetailButtonTapped:)])
     {
-        [self.delegate detailButtonTap:button.tag];
+        [self.delegate didDetailButtonTapped:button.tag];
     }
 }
 

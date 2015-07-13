@@ -78,7 +78,7 @@
 
 #pragma mark - CustomCalloutViewTapDelegate
 
-- (void)detailButtonTap:(NSInteger)index
+- (void)didDetailButtonTapped:(NSInteger)index
 {
     PoiDetailViewController *detail = [[PoiDetailViewController alloc] init];
     detail.poi = self.selectedPoiArray[index];
@@ -92,6 +92,7 @@
 - (void)mapView:(MAMapView *)mapView didDeselectAnnotationView:(MAAnnotationView *)view
 {
     [self.customCalloutView dismissCalloutView];
+    self.customCalloutView.delegate = nil;
 }
 
 - (void)mapView:(MAMapView *)mapView didSelectAnnotationView:(MAAnnotationView *)view

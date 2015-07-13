@@ -11,7 +11,7 @@
 
 @protocol CustomCalloutViewTapDelegate <NSObject>
 
-- (void)detailButtonTap:(NSInteger)index;
+- (void)didDetailButtonTapped:(NSInteger)index;
 
 @end
 
@@ -24,7 +24,5 @@
 @property (nonatomic, weak) id<CustomCalloutViewTapDelegate> delegate;
 
 - (void)dismissCalloutView;
-
-- (void)setPoiArray:(NSArray *)poiArray;
 
 @end
