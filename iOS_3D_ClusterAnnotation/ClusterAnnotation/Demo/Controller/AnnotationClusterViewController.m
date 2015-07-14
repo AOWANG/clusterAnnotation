@@ -106,7 +106,6 @@
 
     [self.mapView setCenterCoordinate:view.annotation.coordinate animated:YES];
 
-    self.customCalloutView = [[CustomCalloutView alloc] init];
     [self.customCalloutView setPoiArray:self.selectedPoiArray];
     self.customCalloutView.delegate = self;
     
@@ -205,6 +204,8 @@
         self.coordinateQuadTree = [[CoordinateQuadTree alloc] init];
         
         self.selectedPoiArray = [[NSMutableArray alloc] init];
+        
+        self.customCalloutView = [[CustomCalloutView alloc] init];
         
         [self setTitle:@"Cluster Annotations"];
     }

@@ -31,20 +31,16 @@ const NSInteger kCellHeight = 44;
 
 @implementation CustomCalloutView
 
-- (void)setPoiArray:(NSArray *)poiArray
+- (void)setPoiArray:(NSArray *)poiArrayy
 {
-    if (_poiArray == poiArray)
-    {
-        return;
-    }
-    
-    _poiArray = poiArray;
+    _poiArray = [NSArray arrayWithArray:poiArrayy];
     
     CGFloat height = kCellHeight*self.poiArray.count + kTableViewBottomMargin > kMaxHeight ? kMaxHeight : kCellHeight*self.poiArray.count + kTableViewBottomMargin;
 
     self.frame = CGRectMake(-kWidth/2+kAnnotationCircleRaduis, -height, kWidth, height);
     
     self.tableview.frame = CGRectMake(kTableViewHoriMargin, 0, self.bounds.size.width-kTableViewHoriMargin*2, self.bounds.size.height-kArrorHeight);
+    [self.tableview reloadData];
 }
 
 - (void)dismissCalloutView
